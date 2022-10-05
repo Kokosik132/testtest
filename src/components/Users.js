@@ -15,17 +15,20 @@ import ClosedCaptionOffOutlinedIcon from '@mui/icons-material/ClosedCaptionOffOu
 import SubtitlesOutlinedIcon from '@mui/icons-material/SubtitlesOutlined';
 import LanOutlinedIcon from '@mui/icons-material/LanOutlined';
 
-import {arraySettings} from "../utils/arraySettings";
-
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
 import Modal from '@mui/material/Modal';
+
+import {arraySettings} from "../utils/arraySettings";
+import {GetImage} from "../services/image/image.services";
 
 
 const Users = () => {
     let [settings, setSettings] = useState(false);
     let [message, setMessage] = useState('');
+    const [id, setId] = useState('');
+    const [randomPicture, setRandomPicture] = useState('');
+    let [data, setData] = useState(arrayUser);
 
 // modal
     const [open, setOpen] = React.useState(false);
@@ -49,15 +52,32 @@ const Users = () => {
 
     useEffect(()=> {
         setSettings(true)
-    },[])
+        GetImage().then((res) => {
+            setRandomPicture(res.data.image)
+            console.log(res.data.image);
+        }).catch(rej => {
+            console.log(rej);
+        })
+    },[id])
 
-    const newMessage = () => {
-        return (
-            <div className={'newMessageContainer'} style={{}}>
-              teest
-            </div>
-        )
+
+    const clickImage = (id) => {
+        console.log('id', id)
+        const newState = data.map(obj => {
+            if (obj.id === id) {
+                return {
+                    id: id,
+                    name: obj.name,
+                    lastname: obj.lastname,
+                    img: randomPicture
+                }
+            }
+            return obj;
+        })
+        setData(newState)
     }
+
+
     const style = {
         position: 'absolute',
         top: "77%",
@@ -129,10 +149,13 @@ const Users = () => {
 
     return (
         <div style={{width: '100%', display: 'flex', flexWrap: 'wrap', height: '90vh', justifyContent: "center"}}>
-            {arrayUser.map((user) => (
+            {data.map((user) => (
                 <div style={{display: "flex", width: "24%", height: 255, position: 'relative',margin: 5}} key={user.id}>
                     <div style={{position: 'absolute', bottom: 10, left: 15, color: 'white'}}>{user.name} {user.lastname}</div>
-                    <img src={user.img} style={{width: '100%', height: '100%', border: '1px solid black', borderRadius: 10, objectFit: 'cover' }}alt="face"/>
+                    <img src={user.img} style={{width: '100%', height: '100%', border: '1px solid black', borderRadius: 10, objectFit: 'cover' }}alt="face" onClick={() => {
+                        setId(user.id);
+                        clickImage(user.id)
+                    }}/>
                 </div>))}
             <div style={{width: '97%', display: "flex", justifyContent: "space-between", alignItems: 'center', padding: 15}}>
                 <div style={{width: '12%'}} className='white'>Team meeting</div>
