@@ -1,0 +1,80 @@
+.icon {
+    height: 30px;
+    width: 30px;
+    background-color: rgb(69, 72, 78);
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 2px;
+    color: #ffff;
+    cursor: pointer;
+}
+
+.iconCall {
+    height: 30px;
+    width: 50px;
+    background-color: red;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 2px;
+    color: #ffff;
+    cursor: pointer;
+}
+.containerIcon {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-right: 5.8%;
+}
+.white {
+    color: #FFF;
+    width: 30px;
+    gap: 18px;
+}
+.notification {
+    color: white;
+    background: grey;
+    position: absolute;
+    right: 3.8%;
+    bottom: 7.5%;
+    width: 18px;
+    font-size: x-small;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+}
+.containerSettings{
+    background-color: #eaeaea;
+    position: absolute;
+    border-radius: 7px;
+    bottom: 10%;
+    left: 55%;
+    width: 300px;
+    /*z-index: auto;*/
+}
+.mapContainer {
+    display: flex;
+    background-color: #eaeaea;
+    flex-direction: row;
+    width: 90%;
+    margin: 5%;
+    cursor: pointer;
+    align-items: center;
+}
+.divdiv {
+    width: 200px;
+    height: 100px;
+    color: red;
+    background-color: #FFFFFF;
+}
+.newMessageContainer {
+    width: 200px;
+    height: 100px;
+    background-color: #eaeaea;
+    border-radius: 7px;
+    position: absolute;
+}
+
